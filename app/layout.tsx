@@ -18,18 +18,19 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className }>
+      <body className={inter.className}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-            <Navbar />
-            <div className="flex justify-center items-center w-full m-0 p-0">
-
-          {children}
+          <Navbar />
+          <div className="flex justify-center items-center w-full m-0 p-0">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 my-4 w-[90vw] md:w-[80vw] ">
+              {children}  
             </div>
+          </div>
         </ThemeProvider>
       </body>
     </html>
