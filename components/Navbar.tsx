@@ -18,6 +18,7 @@ import logo from "../lib/logo";
 import Image from "next/image";
 import { AlignJustify, Mail, Linkedin, Github } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { usePathname } from "next/navigation";
 
 const socials = [
   {
@@ -43,8 +44,11 @@ const socials = [
   },
 ];
 
+const focusTextColor = "text-slate-900 dark:text-white";
+
 const Navbar = () => {
   const { avatarLogo } = logo;
+  const path = usePathname();
   const socialsList = socials.map((social) => (
     <ListItem
       key={social.name}
@@ -79,7 +83,13 @@ const Navbar = () => {
           <RouteButton href="/" label="Home" />
           <RouteButton href="/projects" label="Projects" />
           <NavigationMenuItem>
-            <NavigationMenuTrigger className="text-[9px] md:text-sm text-slate-500 dark:text-slate-300 dark:hover:text-white hover:text-slate-900">
+            <NavigationMenuTrigger
+              className={` text-[9px] md:text-sm ${
+                path === "/about"
+                  ? "text-slate-900 dark:text-white"
+                  : "text-slate-500 dark:text-slate-300"
+              }  dark:hover:text-white hover:text-slate-900`}
+            >
               About
             </NavigationMenuTrigger>
             <NavigationMenuContent>
@@ -87,7 +97,7 @@ const Navbar = () => {
                 <li className="row-span-3 mb-3">
                   <NavigationMenuLink asChild>
                     <Link
-                      className="flex h-full w-full select-none flex-col justify-end   hover:bg-gray-400 dark:hover:bg-gray-500 rounded-md bg-gradient-to-b from-muted/50 to-muted p-3 md:p-6 no-underline outline-none focus:shadow-md"
+                      className={` flex h-full w-full select-none flex-col justify-end   hover:bg-gray-400 dark:hover:bg-gray-500 rounded-md bg-gradient-to-b from-muted/50 to-muted p-3 md:p-6 no-underline outline-none focus:shadow-md`}
                       href="/about"
                     >
                       <Image
@@ -116,7 +126,7 @@ const Navbar = () => {
         <NavigationMenu className=" list-none w-full ">
           <NavigationMenuItem>
             <NavigationMenuTrigger className="text-[9px] md:text-sm text-slate-00 dark:hover:text-white hover:text-slate-900">
-              <AlignJustify  size={18}/>
+              <AlignJustify size={18} />
             </NavigationMenuTrigger>
             <NavigationMenuContent className=" w-screen p-3 bg-white dark:bg-slate-900 grid grid-cols-3 gap-3">
               <h1 className="col-span-3 text-slate-900 dark:text-white ">
@@ -162,9 +172,22 @@ const Navbar = () => {
 
 export default Navbar;
 
-const RouteButton = ({ href, label }: { href: string; label: string }) => {
-  const buttonclass =
-    "text-decoration-none text-[9px] md:text-sm text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white ";
+const RouteButton = ({
+  href,
+  label,
+  className,
+}: {
+  href: string;
+  label: string;
+  className?: string;
+}) => {
+  const path = usePathname();
+  const buttonclass = `${
+    path === href
+      ? "text-slate-900 dark:text-white "
+      : " text-slate-500 dark:text-slate-300"
+  } text-decoration-none text-[9px] md:text-sm  hover:text-slate-900 dark:hover:text-white`;
+
   return (
     <NavigationMenuItem>
       <Link href={`${href}`} legacyBehavior passHref>
@@ -215,7 +238,7 @@ const NavLogoButton = () => {
     <NavigationMenuItem>
       <NavigationMenuLink
         asChild
-        className="flex justify-center items-center dark:hover:bg-slate-800 hover:bg-slate-300 rounded-md p-3"
+        className="flex justify-center items-center dark:hover:bg-slate-700 bg-opacity-30 hover:bg-slate-300 rounded-md p-3"
       >
         <Link href={"/"} className="flex  justify-center items-center gap-1">
           <Image

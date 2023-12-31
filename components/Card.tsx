@@ -48,7 +48,7 @@ const Card: React.FC<CardProps> = ({
       case "md":
         return "col-span-1 row-span-12";
       case "lg":
-        return "col-span-1 md:col-span-2  row-span-12";
+        return "col-span-2 md:col-span-2  row-span-12";
       default:
         return "col-span-1 row-span-12";
     }
@@ -65,11 +65,11 @@ const Card: React.FC<CardProps> = ({
         {children}
         <div className="flex justify-between items-end  w-full ">
           <div className=" ">
-            <h1 className="text-lg text-slate-100 font-bold">{title}</h1>
+            <h1 className="text-lg  text-slate-200 font-bold">{title}</h1>
             <p
               id="description"
-              className="text-sm max-h-1/3 text-ellipsis  text-pretty text-slate-300"
-            >
+              className="text-sm  max-sm:line-clamp-1  max-h-1/3 text-ellipsis  text-pretty text-slate-300"
+            > 
               {description.substring(0, 60)}
             </p>
           </div>
