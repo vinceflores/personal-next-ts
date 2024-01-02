@@ -3,7 +3,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Card from "@/components/Card";
 import Modal from "@/components/Modal";
-import data from '../lib/data'
+import {data} from '../lib/data'
 
 export default async function Home() {
   return await (
